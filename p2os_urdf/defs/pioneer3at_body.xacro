@@ -6,11 +6,20 @@
        xmlns:xacro="http://ros.org/wiki/xacro"
 >
 
+<!-- fictitious link (frame) for navigation stack -->
+  <link name="base_footprint"/>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <child link="base_link" />
+    <parent link="base_footprint"/>
+  </joint>
+
 <!-- Chassis -->
 	<link name="base_link">
 		<inertial>
 			<mass value="10.0"/>
-			<origin xyz="0 0 0.177"/>
+			<origin xyz="0 0 0"/>
 			<inertia ixx="0.3338" ixy="0.0" ixz="0.0"
 				 iyy="0.4783" iyz="0.0"
 				 izz="0.3338"/>
@@ -34,6 +43,8 @@
 	<gazebo reference="base_link">
 		<material value="Gazebo/Red"/>
 	</gazebo>
+	
+	
 
 <!-- Top -->
 	<link name="top_plate">
