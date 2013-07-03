@@ -6,6 +6,15 @@
        xmlns:xacro="http://ros.org/wiki/xacro"
 >
 
+<!-- fictitious link (frame) for navigation stack -->
+  <link name="base_footprint"/>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <child link="base_link" />
+    <parent link="base_footprint"/>
+  </joint>
+
 <!-- Chassis -->
 	<link name="base_link">
 		<inertial>
@@ -34,35 +43,6 @@
 	<gazebo reference="base_link">
 		<material value="Gazebo/Red"/>
 	</gazebo>
-	
-	<joint name="base_link_joint" type="fixed">
-		<origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
-		<parent link="base_footprint"/>
-		<child link="base_link"/>
-	</joint>
-	
-	<!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin,
-         navigation stack depends on this frame -->
-	<link name="base_footprint">
-		<inertial>
-        <mass value="0.1" />
-        <origin xyz="0 0 0.354" />
-        <inertia ixx="0.01" ixy="0.0" ixz="0.0"
-                 iyy="0.01" iyz="0.0" izz="0.01" />
-      </inertial>
-		<visual name="base_f_visual">
-			<origin xyz="0 0 0.354" rpy="0 0 0"/>
-			<geometry name="pioneer_bf_geom">
-				<box size="0.01 0.01 0.01" />
-			</geometry>
-		</visual>
-		<collision>
-			<origin xyz="0 0 0.354" rpy="0 0 0"/>
-				<geometry>
-					<box size="0.01 0.01 0.01" />
-				</geometry>
-		</collision>
-	</link>
 
 <!-- Top -->
 	<link name="top_plate">
