@@ -40,6 +40,8 @@ P2OSNode::P2OSNode( ros::NodeHandle nh ) :
   // Use sonar
   ros::NodeHandle n_private("~");
   n_private.param("use_sonar", use_sonar_, false);
+  
+  n_private.param("publish_tf", publish_tf_, true);
 
   // read in config options
   // bumpstall
@@ -697,7 +699,7 @@ P2OSNode::StandardSIPPutData(ros::Time ts)
   p2os_data.position.header.stamp = ts;
   pose_pub_.publish( p2os_data.position );
   p2os_data.odom_trans.header.stamp = ts;
-  odom_broadcaster.sendTransform( p2os_data.odom_trans );
+  if (publish_tf_) odom_broadcaster.sendTransform( p2os_data.odom_trans );
 
   p2os_data.batt.header.stamp = ts;
   batt_pub_.publish( p2os_data.batt );

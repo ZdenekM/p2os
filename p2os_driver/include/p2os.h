@@ -151,6 +151,7 @@ class P2OSNode
     double desired_freq;
     double lastPulseTime; // Last time of sending a pulse or command to the robot
     bool use_sonar_;
+    bool publish_tf_;
 
     P2OSPtz ptz_;
 
